@@ -32,7 +32,7 @@ allButtons.forEach((button) => {
 document.getElementById("button").addEventListener("click", (e) => {
   const quest = document.getElementById("input").value.toLowerCase();
   result.innerHTML = ""; // Limpiar resultados anteriores
-  search(movies, quest)
+  search(movies, quest, result)
     .then((filter) => {
       // Ejecuta la función pasada en el resolve
       cards(filter, result);

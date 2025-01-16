@@ -1,8 +1,9 @@
 // Función de search
-export function search(movies, quest) {
+export function search(movies, quest, result) {
   return new Promise((resolve, reject) => {
     if (!quest) {
       alert("No se ingresaron datos para realizar la búsqueda."); //Mensaje de alerta de validación para no busqueda
+      cards(movies, result);
     } else {
       // Filtrar los libros que contienen la palabra en la descripción
       const filter = movies.filter((movie) =>
