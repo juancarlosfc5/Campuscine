@@ -1,34 +1,35 @@
+//Import modules and object
 import { movies } from "./data.js";
 import { search, cards, popup, detail } from "./methods.js";
 
-//Extraer texto ingresado por el usuario
-const result = document.getElementById("results"); //Definir contenedor de salida
+//Definir contenedor de salida
+const result = document.getElementById("results");
 
-//Impresion inicial
+//Impresion inicial de las cards de todas las peliculas
 cards(movies, result);
 
-//Impresion ver detalle
-const allButtons = document.querySelectorAll(".buttonDetail");
+//Impresion card ver detalle
+const allButtons = document.querySelectorAll(".buttonDetail"); //Extraer datos de nombres de los botones
 allButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    const name = button.getAttribute("data-name");
-    console.log(name);
+    const name = button.getAttribute("data-name"); //Almacenar temporalmente datos
     detail(movies, name)
       .then((filter) => {
-        // Ejecuta la función pasada en el resolve
+        // Ejecuta la función pasada en el resolve para mostrar el popup
         popup(filter, result);
       })
       .catch((message) => {
+        // Ejecuta el valor falso para la promesa
         const error = document.createElement("p");
         error.innerHTML = /*html*/ `
       ${message}
       `;
-        result.appendChild(error);
+        result.appendChild(error); // Imprime el valor en el contenedor de salida
       });
   });
 });
 
-// Agrega un evento de click al botón
+// Agrega un evento de click al botón ver detalle
 document.getElementById("button").addEventListener("click", (e) => {
   const quest = document.getElementById("input").value.toLowerCase();
   result.innerHTML = ""; // Limpiar resultados anteriores
@@ -58,10 +59,11 @@ document.getElementById("button").addEventListener("click", (e) => {
       });
     })
     .catch((message) => {
+      // Ejecuta el valor falso para la promesa
       const error = document.createElement("p");
       error.innerHTML = /*html*/ `
       ${message}
       `;
-      result.appendChild(error);
+      result.appendChild(error); // Imprime el valor en el contenedor de salida
     });
 });
